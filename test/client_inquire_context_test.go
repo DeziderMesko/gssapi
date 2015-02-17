@@ -66,6 +66,7 @@ func TestClientInquireContext(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	verifyInquireContextResult(t, string(body),
 		[]string{
 			`"[a-zA-Z_-]+@[[:graph:]]+"`,
