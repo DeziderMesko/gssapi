@@ -174,7 +174,8 @@ go test github.com/apcera/gssapi
 build_image "service" "service-${env_suffix}" "$KEYTAB_FUNCTION" >/dev/null
 run_image "service" \
         "service-${env_suffix}" \
-        "--detach \
+        "--publish 8080:80 \
+        --detach \
         $DOCKER_KDC_OPTS \
         --volume $TEST_DIR/gssapi:/opt/go/src/github.com/apcera/gssapi" >/dev/null
 map_ports "service" 80

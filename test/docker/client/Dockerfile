@@ -4,11 +4,13 @@ FROM ubuntu:14.04
 RUN apt-get -y update
 RUN apt-get -y install \
         gcc \
-        krb5-user \
         libgssapi-krb5-2 \
         libkrb5-dev \
         libsasl2-modules-gssapi-mit \
         wget
+
+RUN apt-get -y install krb5-user
+
 RUN (cd /tmp && wget https://storage.googleapis.com/golang/go1.4.1.linux-amd64.tar.gz && tar xvf go1.4.1.linux-amd64.tar.gz && mv go/ /opt)
 ENV GOROOT="/opt/go"
 

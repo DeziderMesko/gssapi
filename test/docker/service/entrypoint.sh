@@ -8,6 +8,8 @@ cat /tmp/krb5.conf.template \
         | sed -e "s/REALM_NAME/${REALM_NAME}/g" \
 	> /opt/go-gssapi-test-service/krb5.conf
 
+#kinit -k -t /opt/go-gssapi-test-service/krb5.keytab -V ${SERVICE_NAME}@${REALM_NAME}
+
 (cd /opt/go-gssapi-test-service && go test -c -o test -tags 'servicetest' github.com/apcera/gssapi/test)
 
 exec /opt/go-gssapi-test-service/test \
@@ -15,6 +17,7 @@ exec /opt/go-gssapi-test-service/test \
         --debug=true \
         --service=true \
 	--service-name=${SERVICE_NAME} \
+        --debug=true \
 	--service-address=:80 \
 	--gssapi-path=/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2 \
         --krb5-ktname=/opt/go-gssapi-test-service/krb5.keytab \

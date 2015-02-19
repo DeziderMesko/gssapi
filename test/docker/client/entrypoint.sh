@@ -39,11 +39,10 @@ cat $KRB5_CONFIG_TEMPLATE \
 	> $KRB5_CONFIG
 
 echo ${USER_PASSWORD} | kinit -V ${USER_NAME}@${REALM_NAME} >/dev/null
+klist -A
 
 (cd $TEST_DIR && go test -c -o test -tags 'clienttest' github.com/apcera/gssapi/test)
 
-# --test.bench=.
-# --test.benchtime=2s
 $TEST_DIR/test \
 	--test.v=true \
         --debug=true \

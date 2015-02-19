@@ -7,6 +7,9 @@ RUN apt-get -y install \
         libsasl2-modules-gssapi-mit \
         wget
 
+RUN apt-get install -y krb5-user 
+
+
 RUN (cd /tmp && wget https://storage.googleapis.com/golang/go1.4.1.linux-amd64.tar.gz && tar xvf go1.4.1.linux-amd64.tar.gz && mv go/ /opt)
 ENV GOROOT="/opt/go"
 ADD krb5.keytab /opt/go-gssapi-test-service/krb5.keytab
